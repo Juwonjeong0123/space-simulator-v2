@@ -28,10 +28,14 @@ class Camera:
         """
         speed = self.speed * delta_time * 100.0  # 속도를 프레임 간 시간에 맞춰 보정
         
+        # 전방 벡터에서 수직 성분(Y축)을 제거하여 수평 이동을 만듭니다.
+        horizontal_front = np.array([self.front[0], 0, self.front[2]])
+        horizontal_front = horizontal_front / np.linalg.norm(horizontal_front)
+
         if direction == 'W':
-            self.position += speed * self.front
+            self.position += speed * horizontal_front
         elif direction == 'S':
-            self.position -= speed * self.front
+            self.position -= speed * horizontal_front
         elif direction == 'A':
             self.position -= np.cross(self.front, self.up) * speed
         elif direction == 'D':
