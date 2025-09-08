@@ -5,6 +5,9 @@ import numpy as np
 
 # 사용자 정의 모듈 임포트
 from camera import Camera
+from core.body import Sphere
+from utils.vector import Vector3
+from core.body import *
 
 # 윈도우 크기
 WINDOW_WIDTH = 800
@@ -46,30 +49,6 @@ def handle_continuous_keyboard_input(window, delta_time):
     if glfw.get_key(window, glfw.KEY_DOWN) == glfw.PRESS:
         camera.process_rotation('DOWN', delta_time)
 
-def draw_cube():
-    """Renders a colorful cube."""
-    vertices = np.array([
-        [1, 1, -1], [-1, 1, -1], [-1, 1, 1], [1, 1, 1],
-        [1, -1, 1], [-1, -1, 1], [-1, -1, -1], [1, -1, -1],
-        [1, 1, 1], [-1, 1, 1], [-1, -1, 1], [1, -1, 1],
-        [1, -1, -1], [-1, -1, -1], [-1, 1, -1], [1, 1, -1],
-        [1, -1, -1], [1, -1, 1], [1, 1, 1], [1, 1, -1],
-        [-1, 1, -1], [-1, 1, 1], [-1, -1, 1], [-1, -1, -1]
-    ], dtype=np.float32)
-
-    colors = np.array([
-        [1, 0, 0, 1], [0, 1, 0, 1], [0, 0, 1, 1],
-        [1, 1, 0, 1], [0, 1, 1, 1], [1, 0, 1, 1]
-    ], dtype=np.float32)
-
-    glBegin(GL_QUADS)
-    for i in range(6):
-        glColor4fv(colors[i])
-        for j in range(4):
-            index = i * 4 + j
-            glVertex3fv(vertices[index])
-    glEnd()
-
 def draw_grid(size=20, divisions=20):
     """Renders a grid on the XZ plane."""
     glColor3f(0.5, 0.5, 0.5)
@@ -85,6 +64,8 @@ def draw_grid(size=20, divisions=20):
         glVertex3f(-size / 2, 0, z)
         glVertex3f(size / 2, 0, z)
     glEnd()
+
+some = Sphere(1, (0, 0, 0), 3)
 
 def main():
     if not glfw.init():
@@ -135,7 +116,9 @@ def main():
         time = glfw.get_time()
         glRotatef(time * 50, 0.5, 1, 0)
         
-        draw_cube()
+        # draw_cube()
+        # draw 스피어
+        some.draw()
         
         glfw.swap_buffers(window)
 

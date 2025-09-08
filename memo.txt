@@ -1,0 +1,25 @@
+project_root/
+│
+├─ main.py              # 진입점, 루프 실행
+│
+├─ core/
+│   ├─ simulation.py    # 물리 엔진 (중력, 적분기, 정규화 변환)
+│   ├─ body.py          # CelestialBody 클래스 (질량, 위치, 속도, 반지름 등)
+│   ├─ units.py         # SI ↔ 정규화 단위 변환 함수
+│   └─ integrators.py   # 수치적분기 (Euler, Leapfrog, RK4)
+│
+├─ graphics/
+│   ├─ renderer.py      # OpenGL 초기화, 그리기 루프
+│   ├─ shaders.py       # 셰이더 코드 (단순 광원, 색상)
+│   └─ camera.py        # 카메라 제어 (줌, 회전)
+│
+├─ data/
+│   ├─ solar_system.json # 초기 조건 (행성 궤도, 위성, 혜성)
+│   └─ textures/         # 간단한 행성 텍스처(낮은 해상도)
+│
+├─ utils/
+│   └─ logger.py        # 디버깅 및 성능 로그
+│
+└─ docs/
+    └─ design.md        # 설계 메모, 단위 정의
+
